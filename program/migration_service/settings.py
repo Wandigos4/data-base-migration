@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-mycg-zk7n@a!90@!+0&1@sy+5v_fm=h_0p)=*mo_fbwfepie3s
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['data-base-migration.onrender.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
