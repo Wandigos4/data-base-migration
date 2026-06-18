@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Видалення заяви</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eef2f5;
+            margin: 0;
+        }
+
+        .header {
+            background-color: #1f4e79;
+            color: white;
+            padding: 25px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .box {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            width: 550px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #1f4e79;
+            color: white;
+            padding: 10px 16px;
+            text-decoration: none;
+            border-radius: 6px;
+            border: none;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        .danger {
+            background-color: #b00020;
+        }
+
+        .danger:hover {
+            background-color: #7a0016;
+        }
+
+        .button:hover {
+            background-color: #163957;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Видалення заяви</h1>
+        <p>Підтвердження видалення запису з бази даних</p>
+    </div>
+
+    <div class="content">
+        <div class="box">
+            <h2>Ви дійсно хочете видалити заяву №{{ application.id }}?</h2>
+
+            <p><b>Заявник:</b> {{ application.applicant }}</p>
+            <p><b>Послуга:</b> {{ application.service }}</p>
+            <p><b>Дата подання:</b> {{ application.created_date|date:"d.m.Y" }}</p>
+            <p><b>Статус:</b> {{ application.get_status_display }}</p>
+
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="button danger">Так, видалити</button>
+                <a href="/applications/" class="button">Скасувати</a>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

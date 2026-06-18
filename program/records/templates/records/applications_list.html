@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Список заяв</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eef2f5;
+            margin: 0;
+        }
+
+        .header {
+            background-color: #1f4e79;
+            color: white;
+            padding: 25px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #d0d0d0;
+            text-align: left;
+        }
+
+        th {
+            background-color: #1f4e79;
+            color: white;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #1f4e79;
+            color: white;
+            padding: 10px 16px;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .button:hover {
+            background-color: #163957;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Список заяв</h1>
+        <p>Перегляд звернень, поданих до міграційної служби</p>
+    </div>
+
+    <div class="content">
+        <a class="button" href="/">Назад на головну</a>
+        <a class="button" href="/applications/add/">Додати заяву</a>
+
+        <form method="get" style="margin-bottom: 20px;">
+    <select name="status" style="padding: 10px; width: 250px;">
+        <option value="">Усі статуси</option>
+
+        {% for value, label in status_choices %}
+            <option value="{{ value }}" {% if status == value %}selected{% endif %}>
+                {{ label }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <button type="submit" class="button">Фільтрувати</button>
+    <a class="button" href="/applications/">Очистити</a>
+</form>
+
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Заявник</th>
+                <th>Послуга</th>
+                <th>Працівник</th>
+                <th>Підрозділ</th>
+                <th>Дата подання</th>
+                <th>Статус</th>
+                <th>Примітка</th>
+                <th>Дія</th>
+            </tr>
+
+            {% for application in applications %}
+            <tr>
+                <td>{{ application.id }}</td>
+                <td>{{ application.applicant }}</td>
+                <td>{{ application.service }}</td>
+                <td>{{ application.employee }}</td>
+                <td>{{ application.department }}</td>
+                <td>{{ application.created_date|date:"d.m.Y" }}</td>
+                <td>{{ application.get_status_display }}</td>
+                <td>{{ application.note }}</td>
+                <td>
+
+    <a class="button" href="/applications/{{ application.id }}/edit/">Редагувати</a>
+    <a class="button" href="/applications/{{ application.id }}/status/">Змінити статус</a>
+    <a class="button" href="/applications/{{ application.id }}/delete/">Видалити</a>
+</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="9">Заяв поки що немає.</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</body>
+</html>

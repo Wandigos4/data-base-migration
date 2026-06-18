@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Список заявників</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eef2f5;
+            margin: 0;
+        }
+
+        .header {
+            background-color: #1f4e79;
+            color: white;
+            padding: 25px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #d0d0d0;
+            text-align: left;
+        }
+
+        th {
+            background-color: #1f4e79;
+            color: white;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #1f4e79;
+            color: white;
+            padding: 10px 16px;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .button:hover {
+            background-color: #163957;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Список заявників</h1>
+        <p>Перегляд осіб, які звернулися до міграційної служби</p>
+    </div>
+
+    <div class="content">
+        <a class="button" href="/">Назад на головну</a>
+        <a class="button" href="/applicants/add/">Додати заявника</a>
+        
+        <form method="get" style="margin-bottom: 20px;">
+    <input type="text" name="q" value="{{ query }}" placeholder="Пошук за прізвищем, ім'ям або номером документа"
+           style="padding: 10px; width: 350px;">
+    <button type="submit" class="button">Пошук</button>
+    <a class="button" href="/applicants/">Очистити</a>
+</form>
+
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Прізвище</th>
+                <th>Ім'я</th>
+                <th>По батькові</th>
+                <th>Дата народження</th>
+                <th>Номер документа</th>
+                <th>Телефон</th>
+                <th>Адреса</th>
+                <th>Дія</th>
+            </tr>
+
+            {% for applicant in applicants %}
+            <tr>
+                <td>{{ applicant.id }}</td>
+                <td>{{ applicant.surname }}</td>
+                <td>{{ applicant.name }}</td>
+                <td>{{ applicant.patronymic }}</td>
+                <td>{{ applicant.birth_date|date:"d.m.Y" }}</td>
+                <td>{{ applicant.document_number }}</td>
+                <td>{{ applicant.phone }}</td>
+                <td>{{ applicant.address }}</td>
+                <td>
+    <a class="button" href="/applicants/{{ applicant.id }}/edit/">Редагувати</a>
+</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="9">Заявників поки що немає.</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</body>
+</html>

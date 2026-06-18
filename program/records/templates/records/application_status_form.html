@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Зміна статусу заяви</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eef2f5;
+            margin: 0;
+        }
+
+        .header {
+            background-color: #1f4e79;
+            color: white;
+            padding: 25px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        form {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            width: 550px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+            font-weight: bold;
+        }
+
+        select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 100px;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #1f4e79;
+            color: white;
+            padding: 10px 16px;
+            text-decoration: none;
+            border-radius: 6px;
+            border: none;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #163957;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Зміна статусу заяви</h1>
+        <p>Заява №{{ application.id }} — {{ application.applicant }}</p>
+    </div>
+
+    <div class="content">
+        <form method="post">
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit" class="button">Зберегти зміни</button>
+            <a href="/applications/" class="button">Назад</a>
+        </form>
+    </div>
+
+</body>
+</html>

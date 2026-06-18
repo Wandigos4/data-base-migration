@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Панель керування</title>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eef2f5;
+            margin: 0;
+        }
+
+        .header {
+            background-color: #1f4e79;
+            color: white;
+            padding: 25px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .card {
+            background-color: white;
+            width: 250px;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .card h2 {
+            font-size: 36px;
+            margin: 0;
+            color: #1f4e79;
+        }
+
+        .card p {
+            margin-top: 10px;
+            color: #333;
+        }
+
+        .buttons {
+            margin-top: 30px;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #1f4e79;
+            color: white;
+            padding: 12px 18px;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-right: 10px;
+        }
+
+        .button:hover {
+            background-color: #163957;
+        }
+        .buttons h2 {
+    margin-top: 25px;
+    color: #1f4e79;
+    font-size: 22px;
+}
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Вебзастосунок обробки даних міграційної служби</h1>
+        <p>Головна панель працівника</p>
+    </div>
+
+    <div class="content">
+        <div class="cards">
+            <div class="card">
+                <h2>{{ applicants_count }}</h2>
+                <p>Заявників у базі</p>
+            </div>
+
+            <div class="card">
+                <h2>{{ applications_count }}</h2>
+                <p>Усього заяв</p>
+            </div>
+
+            <div class="card">
+                <h2>{{ services_count }}</h2>
+                <p>Доступних послуг</p>
+            </div>
+
+            <div class="card">
+                <h2>{{ departments_count }}</h2>
+                <p>Підрозділів</p>
+            </div>
+
+            <div class="card">
+                <h2>{{ new_applications_count }}</h2>
+                <p>Нових заяв</p>
+            </div>
+
+            <div class="card">
+                <h2>{{ completed_applications_count }}</h2>
+                <p>Виконаних заяв</p>
+            </div>
+        </div>
+
+       <div class="buttons">
+    <h2>Основні розділи</h2>
+
+    <a class="button" href="/applicants/">Список заявників</a>
+    <a class="button" href="/applications/">Список заяв</a>
+    <a class="button" href="/services/">Список послуг</a>
+
+    <h2>Аналітика та звіти</h2>
+
+    <a class="button" href="/statistics/">Статистика</a>
+    <a class="button" href="/reports/applications/">Звіт по заявах</a>
+
+    <h2>Система</h2>
+
+    <a class="button" href="/about/">Про систему</a>
+    <a class="button" href="/admin/">Перейти в адмін-панель</a>
+    <form action="/accounts/logout/" method="post" style="display:inline;">
+    {% csrf_token %}
+    <button class="button" type="submit">Вийти</button>
+</form>
+    </div>
+</div>
+
+</body>
+</html>

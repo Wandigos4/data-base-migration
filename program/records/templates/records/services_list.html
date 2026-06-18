@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Список послуг</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eef2f5;
+            margin: 0;
+        }
+
+        .header {
+            background-color: #1f4e79;
+            color: white;
+            padding: 25px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #d0d0d0;
+            text-align: left;
+        }
+
+        th {
+            background-color: #1f4e79;
+            color: white;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #1f4e79;
+            color: white;
+            padding: 10px 16px;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .button:hover {
+            background-color: #163957;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Список послуг</h1>
+        <p>Перелік адміністративних послуг міграційної служби</p>
+    </div>
+
+    <div class="content">
+        <a class="button" href="/">Назад на головну</a>
+        <a class="button" href="/admin/records/service/add/">Додати послугу</a>
+
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Назва послуги</th>
+                <th>Опис</th>
+                <th>Термін виконання</th>
+                <th>Вартість</th>
+            </tr>
+
+            {% for service in services %}
+            <tr>
+                <td>{{ service.id }}</td>
+                <td>{{ service.name }}</td>
+                <td>{{ service.description }}</td>
+                <td>{{ service.processing_days }} днів</td>
+                <td>{{ service.price }} грн</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">Послуг поки що немає.</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</body>
+</html>

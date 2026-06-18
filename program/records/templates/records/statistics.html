@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Статистика</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eef2f5;
+            margin: 0;
+        }
+
+        .header {
+            background-color: #1f4e79;
+            color: white;
+            padding: 25px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background-color: white;
+            width: 220px;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .card h2 {
+            font-size: 34px;
+            margin: 0;
+            color: #1f4e79;
+        }
+
+        .card p {
+            margin-top: 10px;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #d0d0d0;
+            text-align: left;
+        }
+
+        th {
+            background-color: #1f4e79;
+            color: white;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #1f4e79;
+            color: white;
+            padding: 10px 16px;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .button:hover {
+            background-color: #163957;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Статистика системи</h1>
+        <p>Аналітична інформація щодо заяв та послуг міграційної служби</p>
+    </div>
+
+    <div class="content">
+        <a class="button" href="/">Назад на головну</a>
+
+        <div class="cards">
+            <div class="card">
+                <h2>{{ total_applicants }}</h2>
+                <p>Усього заявників</p>
+            </div>
+
+            <div class="card">
+                <h2>{{ total_applications }}</h2>
+                <p>Усього заяв</p>
+            </div>
+
+            <div class="card">
+                <h2>{{ total_services }}</h2>
+                <p>Усього послуг</p>
+            </div>
+
+            <div class="card">
+                <h2>{{ total_departments }}</h2>
+                <p>Усього підрозділів</p>
+            </div>
+        </div>
+
+        <h2>Кількість заяв за статусами</h2>
+
+        <table>
+            <tr>
+                <th>Статус</th>
+                <th>Кількість заяв</th>
+            </tr>
+
+            {% for item in status_stats %}
+            <tr>
+                <td>{{ item.label }}</td>
+                <td>{{ item.count }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <h2>Кількість заяв за типами послуг</h2>
+
+        <table>
+            <tr>
+                <th>Послуга</th>
+                <th>Кількість заяв</th>
+            </tr>
+
+            {% for service in service_stats %}
+            <tr>
+                <td>{{ service.name }}</td>
+                <td>{{ service.applications_count }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="2">Послуг поки що немає.</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</body>
+</html>
